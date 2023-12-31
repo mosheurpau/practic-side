@@ -72,6 +72,25 @@ async function run() {
       res.send(result);
     });
 
+    // update Price
+    app.put("/part/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatePrice = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          price: updatePrice?.price,
+        },
+      };
+      const result = await partsCollection.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
+
     app.get("/review", async (req, res) => {
       const query = {};
       const cursor = reviewsCollection.find(query);
@@ -172,9 +191,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello From Manufacture Car Parts!");
+  res.send("Hello From Mbaba!");
 });
 
 app.listen(port, () => {
-  console.log(`Car Parts app listening on port ${port}`);
+  console.log(`Mbaba app listening on port ${port}`);
 });
