@@ -78,14 +78,14 @@ async function run() {
       const updatePrice = req.body;
       const filter = { _id: ObjectId(id) };
       const options = { upsert: true };
-      const updatedDoc = {
+      const updatedProductPrice = {
         $set: {
           price: updatePrice?.price,
         },
       };
       const result = await partsCollection.updateOne(
         filter,
-        updatedDoc,
+        updatedProductPrice,
         options
       );
       res.send(result);
