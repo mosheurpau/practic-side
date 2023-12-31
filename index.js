@@ -73,7 +73,7 @@ async function run() {
     });
 
     // update Price
-    app.put("/part/:id", async (req, res) => {
+    app.put("/priceUpdate/:id", async (req, res) => {
       const id = req.params.id;
       const updatePrice = req.body;
       const filter = { _id: ObjectId(id) };
