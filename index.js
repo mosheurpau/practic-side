@@ -33,6 +33,13 @@ async function run() {
       res.send(parts);
     });
 
+    app.get("/partHome", async (req, res) => {
+      const query = {};
+      const cursor = partsCollection.find(query);
+      const parts = await cursor.limit(9).toArray();
+      res.send(parts);
+    });
+
     app.post("/part", async (req, res) => {
       const newPart = req.body;
       const result = await partsCollection.insertOne(newPart);
