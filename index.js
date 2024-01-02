@@ -35,8 +35,9 @@ async function run() {
 
     app.get("/partHome", async (req, res) => {
       const query = {};
-      const cursor = partsCollection.find(query);
-      const parts = await cursor.limit(9).toArray();
+      const sortOptions = { _id: -1 };
+      const cursor = partsCollection.find(query).sort(sortOptions).limit(9);
+      const parts = await cursor.toArray();
       res.send(parts);
     });
 
